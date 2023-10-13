@@ -97,7 +97,7 @@ class HTTPClient(object):
         body = self.get_body(arrival)
         headers = self.get_headers(arrival)
 
-        print(headers + "\r\n\r\n" + body)
+        print(body)
 
         self.close()
 
@@ -120,8 +120,8 @@ class HTTPClient(object):
         code = self.get_code(arrival)
         body = self.get_body(arrival)
         headers = self.get_headers(arrival)
-        
-        print(headers + "\r\n\r\n" + body)
+
+        print(body)
 
         self.close()
 
