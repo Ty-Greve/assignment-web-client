@@ -36,10 +36,7 @@ class HTTPClient(object):
     def get_host_port(self,url):
         o = urllib.parse.urlparse(url)
         host = o.hostname
-        # print(host)
         port = o.port
-        # print(port)
-        # print(o.scheme)
 
         if (port == None and o.scheme == "https"):
             port = 443
@@ -48,7 +45,6 @@ class HTTPClient(object):
         else:
             # Check if an error message should be send in this case 
             pass
-        # print(port)
 
         return host, port
 
@@ -58,13 +54,7 @@ class HTTPClient(object):
         return None
 
     def get_code(self, data):
-        # print("dada here")
-        # print(data)
-        # a = data.split("\n")[0].split(" ")
-        # print("a here")
-        # print(a)
         code = int((data.split("\r\n")[0]).split(" ")[1])
-        # print(code)
         return code
 
     def get_headers(self,data):
@@ -73,7 +63,6 @@ class HTTPClient(object):
 
     def get_body(self, data):
         body = data.split("\r\n\r\n")[1]
-        # print(body)
         return body
     
     def sendall(self, data):
@@ -104,10 +93,10 @@ class HTTPClient(object):
         self.sendall("GET " + url + " HTTP/1.1\r\nHost: " + host + "\r\nConnection: close\r\n\r\n")
 
         arrival = self.recvall(self.socket)
-        # print(arrival)
         code = self.get_code(arrival)
         body = self.get_body(arrival)
         headers = self.get_headers(arrival)
+
         print(headers + "\r\n\r\n" + body)
 
         self.close()
@@ -128,10 +117,10 @@ class HTTPClient(object):
             self.sendall("POST " + url + " HTTP/1.1\r\nHost: " + host + "\r\nConnection: close\r\nContent-Length: " + str(contentLength) + "\r\nContent-Type: application/x-www-form-urlencoded\r\n\r\n" + str(urllib.parse.urlencode(args)))
 
         arrival = self.recvall(self.socket)
-        # print(arrival)
         code = self.get_code(arrival)
         body = self.get_body(arrival)
         headers = self.get_headers(arrival)
+        
         print(headers + "\r\n\r\n" + body)
 
         self.close()
