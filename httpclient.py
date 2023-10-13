@@ -38,13 +38,11 @@ class HTTPClient(object):
         host = o.hostname
         port = o.port
 
-        if (port == None and o.scheme == "https"):
-            port = 443
-        elif (port == None and o.scheme == "http"):
+        if  not (o.scheme == "http"):
+            print("Specified Host name is not accepted. Only http is accepted.")
+            quit()
+        if (port == None and o.scheme == "http"):
             port = 80
-        else:
-            # Check if an error message should be send in this case 
-            pass
 
         return host, port
 
